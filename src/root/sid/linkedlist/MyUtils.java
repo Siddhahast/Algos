@@ -98,6 +98,115 @@ public class MyUtils {
         }
     }
 
+    /*
+    API for searching the correct index for inserting an element into an array
+    Using binary search to identify in a sorted array
+     */
+    public static int searchIndex(int arr[], int data){
+        return searchIndex(arr, 0, arr.length-1, data);
+    }
+
+    private static int searchIndex(int arr[], int i, int j, int data){
+        if(i==j){
+            return i;
+        }else{
+            int mid = (i+j)/2;
+            if(data < arr[mid]){
+                return searchIndex(arr, i,mid, data);
+            }else{
+                return searchIndex(arr, mid+1, j, data);
+            }
+        }
+    }
 
 
+    public static int countRightRotate(int [] arr){
+        if(arr.length==0){
+            return 0;
+        }
+        return countRightRotate(arr, 0, arr.length-1);
+    }
+
+    private static int countRightRotate(int[] arr, int i, int j) {
+        if (compare(arr[i], arr[j])) {
+            return i;
+        } else {
+            int mid = (i + j) / 2;
+            if (compare(arr[i], arr[mid])) {
+                return countRightRotate(arr, i, mid);
+            } else {
+                return countRightRotate(arr, mid + 1, j);
+            }
+        }
+    }
+
+    public static boolean compare(int a, int b){
+        if(a<b){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    public static void merge_sort(int[] arr, int i, int j){
+        if(i<j){
+            int mid = (i+j)/2;
+            merge_sort(arr, i, mid);
+            merge_sort(arr, mid+1, j);
+            merge(arr, i, mid, j);
+        }
+    }
+
+    public static void merge(int[] arr, int low, int mid, int high){
+        int lowPtr = low;
+        int midPtr = mid+1;
+        int highPtr = high;
+        int work[] = new int[high-low];
+        int w = low;
+        while(lowPtr<=midPtr && midPtr<=highPtr){
+            if(arr[lowPtr]< arr[midPtr]){
+                work[w++] = arr[lowPtr++];
+            }else{
+                work[w++] = arr[midPtr++];
+            }
+        }
+        while(lowPtr<=mid){
+            work[w++] = arr[lowPtr++];
+        }
+        while(midPtr<highPtr){
+            work[w++] = arr[midPtr++];
+        }
+        while(low<high){
+            arr[low] = work[low];
+            low++;
+        }
+    }
+
+    public static void display_array(int[] arr){
+        for(int i:arr){
+            System.out.println(i);
+        }
+    }
+
+    public static int[] merge(int[] a, int[] b){
+        int[] c = new int[a.length+b.length];
+        int cIndex = 0;
+        int aIndex = 0;
+        int bIndex = 0;
+        while(aIndex<a.length && bIndex<b.length){
+            if(a[aIndex]<b[bIndex]){
+                c[cIndex++] = a[aIndex++];
+            }else{
+                c[cIndex++] = b[bIndex++];
+            }
+        }
+        while(aIndex<a.length){
+            c[cIndex++]=a[aIndex++];
+        }
+        while(bIndex<b.length){
+            c[cIndex++]= b[bIndex++];
+        }
+        return c;
+    }
 }
