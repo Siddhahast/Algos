@@ -65,6 +65,7 @@ public class LinkedList {
 
 
     public Node delete(int data){
+
         if(head.get_data()==data){
             return head.next();
         }else{
