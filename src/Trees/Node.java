@@ -8,6 +8,7 @@ public class Node {
     int data;
     Node leftChild;
     Node rightChild;
+    Node rightShift;
 
     public Node(int data){
         this.data = data;

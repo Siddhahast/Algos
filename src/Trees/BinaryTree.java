@@ -243,5 +243,25 @@ public class BinaryTree {
 
     }
 
+    public Map<Integer, List<Node>> getRightShifts(Node node){
+        Map<Integer, List<Node>> map = new HashMap<Integer, List<Node>>();
+        createRightShiftNode(node, 0, map);
+        return map;
+    }
+
+    private void createRightShiftNode(Node node, int depth, Map<Integer, List<Node>> map){
+        if(node==null){
+            return;
+        }else{
+            if(map.get(depth)==null){
+                map.put(depth, new LinkedList<Node>());
+            }
+            map.get(depth).add(node);
+            createRightShiftNode(node.leftChild, depth+1, map);
+            createRightShiftNode(node.rightChild, depth+1, map);
+        }
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 package Trees;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -43,11 +44,10 @@ public class TreeTest {
         node12.leftChild = node13;
 
         BinaryTree tree = new BinaryTree();
-        int d[] = tree.maximumDimameterOfTree(node1);
-        for(int i:d){
-            System.out.print(i+" ");
-        }
+        Map<Integer, List<Node>> map = tree.getRightShifts(node1);
+        for(Map.Entry entry: map.entrySet()){
 
+        }
 
 
     }
