@@ -72,4 +72,17 @@ public class ArrayUtils {
         }
     }
 
+
+    public static void quick_sort(Element[] elems, int p, int q){
+
+    }
+
+    public static int partition(int[] a , int p, int q){
+        return q;
+    }
+
+    public static void interchange(int[] arr, int i, int j){
+
+    }
+
 }

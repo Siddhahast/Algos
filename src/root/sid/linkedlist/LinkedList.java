@@ -9,6 +9,10 @@ public class LinkedList {
     private int size;
     private int nElements;
 
+    public LinkedList(){
+        nElements = 0;
+    }
+
     /**
      * API to initialize/create a linkedlist in the system
      * @param size

@@ -6,12 +6,10 @@ package classics;
 public class Test {
     public static void main(String[] args) {
 
-        int[] a = {1,2,3,4};
-        classic_questions c = new classic_questions();
-        c.rotate(a, 1);
-
-        for(int i:a){
-            System.out.println(i);
+        int n = 257;
+        int[] bits = classic_questions.binary_representation(n);
+        for(int b: bits){
+            System.out.print(b);
         }
     }
 }
