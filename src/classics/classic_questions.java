@@ -69,4 +69,11 @@ public class classic_questions {
         return bits;
     }
 
+    public void swap_lexicographically(char[][] ch){
+        
+
+    }
+
+
+
 }
