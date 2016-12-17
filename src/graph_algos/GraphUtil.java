@@ -35,4 +35,12 @@ public class GraphUtil {
         }
         return counts/2;
     }
+
+
+    public static boolean cycleInGraph(Graph graph){
+        DepthFirstPaths path = new DepthFirstPaths(graph, 0);
+
+
+        return false;
+    }
 }
