@@ -42,13 +42,9 @@ public class TreeTest {
         node7.rightChild = node10;
         node9.rightChild = node12;
         node12.leftChild = node13;
-
-        BinaryTree tree = new BinaryTree();
-        Map<Integer, List<Node>> map = tree.getRightShifts(node1);
-        for(Map.Entry entry: map.entrySet()){
-
-        }
-
+        int a = 10;
+        int b = a++ + ++a;
+        System.out.print(b);
 
     }
 }

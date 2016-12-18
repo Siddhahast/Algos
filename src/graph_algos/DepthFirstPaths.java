@@ -1,6 +1,7 @@
 package graph_algos;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
@@ -11,14 +12,15 @@ public class DepthFirstPaths {
 
     private boolean[] marked;
     private int[] edgeTo;
-    private String[] color;
+    private String color[];
     private int s;
 
     public DepthFirstPaths(Graph G, int s){
         this.s = s;
-        color[s] = "RED";
-        marked = new boolean[G.getV()];
-        edgeTo = new int[G.getV()];
+        this.color = new String[G.getV()];
+        this.color[s] = "RED";
+        this.marked = new boolean[G.getV()];
+        this.edgeTo = new int[G.getV()];
     }
 
     private String nextColor(int v){
@@ -31,6 +33,7 @@ public class DepthFirstPaths {
 
     public void dfs(Graph G, int v){
         marked[v] = true;
+        System.out.print(v);
         for (int w: G.adj(v)){
             if(!marked[w]){
                 dfs(G, w);
@@ -38,7 +41,6 @@ public class DepthFirstPaths {
             }
         }
     }
-
 
     public boolean is_visited(int v){
         return marked[v];
@@ -60,20 +62,50 @@ public class DepthFirstPaths {
         }
     }
 
-    public boolean isCycle(Graph graph, int v){
+    public boolean cyclicUtil(Graph graph, int v, int parent){
         marked[v] = true;
-        boolean is_cycle = false;
-        for(int i=0; i<graph.getV(); i++){
-            for (int w:graph.adj(i)){
-                if(marked[w]==true){
-                    is_cycle = true;
-                    break;
-                }else{
-                    marked[w] = true;
+        for (int w:graph.adj(v)){
+            if(!marked[w]){
+                if(cyclicUtil(graph, w, v)) return true;
+            } else if(w!=parent){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    API to test whether a graph has a cycle or not.
+     */
+    public boolean isCyclic(Graph graph){
+        for (int i=0;i<graph.getV();i++){
+            marked[i] = false;
+        }
+        for (int i=0;i<graph.getV();i++){
+            if(!marked[i]){
+                if (cyclicUtil(graph, i, -1)){
+                    return true;
                 }
             }
         }
-        return is_cycle;
+        return false;
+    }
+
+
+    public boolean isCycle(Graph graph, int v, Set<Integer> visited){
+        visited.add(v);
+        boolean cycle = false;
+        for (int w:graph.adj(v)){
+            if(visited.contains(w)){
+                if(edgeTo[w]!=v){
+                    cycle = true;
+                }
+            } else{
+                edgeTo[w] = v;
+                cycle = isCycle(graph, w, visited);
+            }
+        }
+        return cycle;
     }
 
     public boolean isSafe(Graph graph, int[] color,int v, int c){
@@ -94,7 +126,6 @@ public class DepthFirstPaths {
         }
         for (int i=1;i<=m; i++){
             if(isSafe(graph, color, v, i)){
-
                 color[v] = i;
                 if(mGraphColoringUtil(graph, color, v+1, m)){
                     return true;
@@ -103,6 +134,12 @@ public class DepthFirstPaths {
             }
         }
         return false;
+    }
+
+    public void printColors(int[] color){
+        for (int w:color){
+            System.out.print(w);
+        }
     }
 
     /*
@@ -114,26 +151,34 @@ public class DepthFirstPaths {
         if(!mGraphColoringUtil(graph, color, 0, m)){
             System.out.println("Solution does not exist");
         }
+        printColors(color);
+
         //Print the solution color array;
     }
 
     public boolean bipartite(Graph graph , int v){
-        marked[v] = true;
-        boolean bi = true;
-        for(int w:graph.adj(v)){
-            if(!marked[w]){
-                color[w] = nextColor(v);
-                bi = bipartite(graph, w);
-                return bi;
-            }else{
-                if(color[w].equals(color[v])){
-                    return false;
-                }
-            }
+        int[] color = new int[graph.getV()];
+        if(!mGraphColoringUtil(graph, color, 0, 2)){
+            return false;
         }
-        return bi;
+        return true;
     }
 
+    public void eulerCycle(Graph graph, int v, Stack<Integer> stack){
+        marked[v] = true;
+        for (int w:graph.adj(v)){
+            if(marked[w]){
+
+            }
+        }
+    }
+
+    private boolean isConnected(Graph graph){
+        for(int i=0; i<graph.getV();i++){
+
+        }
+        return false;
+    }
 
 
 }

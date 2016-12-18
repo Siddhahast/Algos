@@ -26,4 +26,8 @@ public class Bag<T> {
         return list;
     }
 
+    public int size(){
+        return list.size();
+    }
+
 }

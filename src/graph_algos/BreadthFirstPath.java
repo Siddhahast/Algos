@@ -12,31 +12,40 @@ public class BreadthFirstPath {
     private int[] edgeTo;
     private int[] distTo;
     private int s;
+    Queue<Integer> q = new LinkedList<Integer>();
 
     public BreadthFirstPath(Graph G, int s){
         this.s = s;
         marked = new boolean[G.getV()];
         edgeTo = new int[G.getV()];
         distTo = new int[G.getV()];
+        bfs(G, 0);
     }
 
     public void bfs(Graph G, int v){
 
-        Queue<Integer> q = new LinkedList<Integer>();
-        q.add(s);
-        marked[s] = true;
-        distTo[s] = 0;
+        q.add(v);
+        marked[v] = true;
+        distTo[v] = 0;
         while(!q.isEmpty()){
             int u = q.poll();
+            int dist = distTo[u]++;
             for(int w: G.adj(u)){
                 if(!marked[w]){
-                    distTo[w] = distTo[u]++;
+                    distTo[w] = dist;
+                    marked[w] = true;
                     edgeTo[w] = u;
                     q.add(w);
                 }
             }
         }
 
+    }
+
+    public void dispalyDist(){
+        for(int i: distTo){
+            System.out.println(i);
+        }
     }
 
 }
