@@ -13,6 +13,9 @@ public class Digraph {
     public Digraph(int V){
         this.V = V;
         adj = new Bag[V];
+        for(int i=0;i<V;i++){
+            adj[i] = new Bag<Integer>();
+        }
     }
 
     public void addEdge(int v , int w){

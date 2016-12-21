@@ -3,7 +3,7 @@ package graph_algos;
 /**
  * Created by siddhahastmohapatra on 18/12/16.
  */
-public class DirectedEdge {
+public class DirectedEdge implements Comparable<DirectedEdge>{
 
     private int v;
     private int w;
@@ -27,4 +27,14 @@ public class DirectedEdge {
         return weight;
     }
 
+    @Override
+    public int compareTo(DirectedEdge o) {
+        if(this.weight>o.weight()){
+            return 1;
+        }else if(this.weight<o.weight()){
+            return -1;
+        }else{
+            return 0;
+        }
+    }
 }

@@ -74,6 +74,49 @@ public class classic_questions {
 
     }
 
+    public static int max(int a, int b){
+        if(a>=b){
+            return a;
+        } else{
+            return b;
+        }
+    }
+
+    public static int min(int a, int b){
+        if(a>=b){
+            return b;
+        } else{
+            return a;
+        }
+    }
+
+
+    /*
+    Genric function for the water trapping problem.
+     */
+    public static int getWaterCapacity(int[] arr){
+        int[] left = new int[arr.length];
+        int right[] = new int[arr.length];
+        left[0] = arr[0];
+
+        for(int i=1;i<arr.length; i++){
+            left[i] = max(left[i-1], arr[i]);
+        }
+        right[arr.length-1] = arr[arr.length-1];
+        for(int i = arr.length-2; i>=0;i--){
+            right[i] = max(right[i+1], arr[i]);
+        }
+        int water = 0;
+        for(int i=0;i<arr.length;i++){
+            water = water + (min(left[i],right[i])-arr[i]);
+        }
+        return water;
+    }
+
+    public static void main(String[] args) {
+        int[] arr= {3,0,0,2,0,4};
+        System.out.print(getWaterCapacity(arr));
+    }
 
 
 }
