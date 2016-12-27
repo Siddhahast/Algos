@@ -1,8 +1,12 @@
 package classics;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
-import java.util.Stack;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * Created by siddhahastmohapatra on 18/11/16.
@@ -113,10 +117,167 @@ public class classic_questions {
         return water;
     }
 
-    public static void main(String[] args) {
-        int[] arr= {3,0,0,2,0,4};
-        System.out.print(getWaterCapacity(arr));
+    /*
+    Fibonacci Series Dynamic Memoization.
+     */
+    private static int MAX_VALUE = 10000;
+    private static int NIL = -1;
+    private static int[] lookup = new int[MAX_VALUE];
+
+    public static void initialize(){
+        for(int i=0;i<MAX_VALUE;i++){
+            lookup[i] = NIL;
+        }
     }
+
+    public static int fib(int n){
+        if(lookup[n]==NIL){
+            if(n<=1){
+                lookup[n] = n;
+            } else{
+                lookup[n] = fib(n-1)+fib(n-2);
+            }
+        }
+        return lookup[n];
+    }
+
+
+    /*
+    Algorithm - 0/1 Knapsack problem
+     */
+
+    private static class Item implements Comparable<Item>{
+        int value;
+        int weight;
+
+        public Item(int weight, int value){
+            this.weight = weight;
+            this.value = value;
+        }
+        @Override
+        public int compareTo(Item o) {
+            if (((double)(this.value/this.weight))>=((double)(o.value/o.weight))){
+                return 1;
+            } else{
+                return -1;
+            }
+        }
+
+    }
+
+    private static void rearrange(List<Item> items){
+        Collections.sort(items);
+    }
+
+    /*
+    Total admissible weight is w.
+    List of items items.
+    The items cant be subdivided.
+    Either choose the item in the solution or discard the item.
+    Only one item is available to be used, there are no infinite list of items of a particular value.
+    Find out the items that selected in the process using the method -- selectedItems using the dynamic 2D array.
+     */
+    public static void knapsack(List<Item> items, int w){
+        rearrange(items);
+        int s = items.size();
+        int[] weights = new int[items.size()+1];
+        int[] values = new int[items.size()+1];
+        int i = 1;
+        for(Item item:items){
+            weights[i] = item.weight;
+            values[i] = item.value;
+            i++;
+        }
+        int[][] grid = new int[w+1][w+1];
+        //Start the logic here
+        for(int k=0;k<=w;k++){
+            grid[0][k] = 0;
+        }
+        for(i =1;i<weights.length;i++){
+            for(int j = 1;j<=w;j++){
+                if(weights[i]>j){
+                    grid[i][j] = grid[i-1][j];
+                    System.out.print(grid[i][j]+ "\t");
+                } else{
+                    grid[i][j] = max(grid[i-1][j], grid[i-1][j-weights[i]]+values[i]);
+                    System.out.print(grid[i][j]+ "\t");
+                }
+            }
+            System.out.println();
+        }
+        List<Item> selectedItems = selectedItems(grid, items.size(), w, weights);
+        for (Item item:selectedItems){
+            System.out.print(item.weight);
+        }
+
+    }
+
+    private static List<Item> selectedItems(int T[][], int w, int total, int[] weights){
+        List<Item> selectedItems = new ArrayList<Item>();
+        int i = w;
+        int j = total;
+        while(j!=0){
+            if(T[i][j]==T[i-1][j]){
+                i--;
+            } else{
+                selectedItems.add(new Item(weights[i],j));
+                j = j-weights[i];
+                i--;
+            }
+        }
+        return selectedItems;
+    }
+
+
+    public static void main(String[] args) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line = null;
+        try {
+            line = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int N = Integer.parseInt(line);
+
+        Scanner s = new Scanner(System.in);
+        int edges = Integer.parseInt(s.nextLine());
+
+        Set<Integer> vertices = null;
+        for (int i = 0; i < N; i++) {
+            vertices = new HashSet<Integer>();
+            for(int j =0;j<edges;j++){
+                String edgeParams = s.nextLine();
+                StringTokenizer str = new StringTokenizer(edgeParams);
+                int from = Integer.parseInt(str.nextToken());
+                int to = Integer.parseInt(str.nextToken());
+                vertices.add(from);
+                vertices.add(to);
+            }
+            System.out.println(vertices.size());
+        }
+    }
+
+
+    public static boolean number_divisible7(int num){
+        return false;
+    }
+
+    public static int find(int[] arr, int n, int low, int high){
+        if(high==low){
+            if(arr[high] == n) return high;
+            else return -1;
+        } else {
+            int mid = (high+low)/2;
+            if(arr[mid]>n){
+                return find(arr, n, low, mid);
+            } else if(arr[mid]<n){
+                return find(arr, n, mid+1, high);
+            } else{
+                return mid;
+            }
+        }
+    }
+
 
 
 }
