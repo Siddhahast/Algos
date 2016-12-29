@@ -229,33 +229,33 @@ public class classic_questions {
     }
 
 
-    public static void main(String[] args) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String line = null;
-        try {
-            line = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int N = Integer.parseInt(line);
-
-        Scanner s = new Scanner(System.in);
-        int edges = Integer.parseInt(s.nextLine());
-
-        Set<Integer> vertices = null;
-        for (int i = 0; i < N; i++) {
-            vertices = new HashSet<Integer>();
-            for(int j =0;j<edges;j++){
-                String edgeParams = s.nextLine();
-                StringTokenizer str = new StringTokenizer(edgeParams);
-                int from = Integer.parseInt(str.nextToken());
-                int to = Integer.parseInt(str.nextToken());
-                vertices.add(from);
-                vertices.add(to);
-            }
-            System.out.println(vertices.size());
-        }
-    }
+//    public static void main(String[] args) {
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String line = null;
+//        try {
+//            line = br.readLine();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        int N = Integer.parseInt(line);
+//
+//        Scanner s = new Scanner(System.in);
+//        int edges = Integer.parseInt(s.nextLine());
+//
+//        Set<Integer> vertices = null;
+//        for (int i = 0; i < N; i++) {
+//            vertices = new HashSet<Integer>();
+//            for(int j =0;j<edges;j++){
+//                String edgeParams = s.nextLine();
+//                StringTokenizer str = new StringTokenizer(edgeParams);
+//                int from = Integer.parseInt(str.nextToken());
+//                int to = Integer.parseInt(str.nextToken());
+//                vertices.add(from);
+//                vertices.add(to);
+//            }
+//            System.out.println(vertices.size());
+//        }
+//    }
 
 
     public static boolean number_divisible7(int num){
@@ -275,6 +275,88 @@ public class classic_questions {
             } else{
                 return mid;
             }
+        }
+    }
+
+
+    public static void activitesSelect(int[] start, int[] end){
+        int activitySum[] = new int[start.length];
+
+        int max_activities = 0;
+
+        for(int i=0;i<start.length;i++){
+            for(int j=i+1;j<start.length;j++){
+
+                if(start[j]>end[i]){
+                    System.out.print(i+" ");
+                    i=j;
+                    max_activities ++;
+                } else{
+
+                }
+                if(j==start.length-1){
+                    System.out.print(i);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        int T[][] = {   {0,1,0,0,0,0,0,0,0,0},
+                        {1,1,1,1,1,0,0,0,0,0},
+                        {0,0,0,0,1,0,0,0,0,0},
+                        {0,0,0,0,1,0,1,1,1,1},
+                        {0,2,0,0,1,0,1,0,0,0},
+                        {0,0,0,1,1,1,1,0,0,0},
+                        {1,1,1,1,0,0,0,0,0,0},
+                        {0,0,0,1,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0,0,0}
+        };
+
+        int rows = 9;
+        int cols = 10;
+        boolean G[][] = new boolean[rows][cols];
+        int dest = 2;
+        Map<String, Integer> map = findCell(T, 0, 0, 2, 9, 10, G);
+        System.out.print(map.get("row")+ " row -- " +map.get("col")+ "column");
+    }
+
+
+    public static Map<String, Integer> findCell(int T[][], int i, int j, int dest, int row, int cols, boolean G[][]){
+        if(T[i][j] == dest){
+            Map<String, Integer> map = new HashMap<>();
+            map.put("col", j+1);
+            map.put("row", i+1);
+            return map;
+        } else{
+            Map<String, Integer> c = null;
+            G[i][j] = true;
+            /*
+            Move right
+             */
+            if(j<cols-1 && T[i][j+1]!=0 && !G[i][j+1] && c==null){
+                c = findCell(T, i, j+1, dest, row, cols, G);
+            }
+            /*
+            Move up
+             */
+            if(i>0 && T[i-1][j]!=0 && !G[i-1][j] && c==null){
+                c = findCell(T, i-1, j, dest, row, cols, G);
+            }
+            /*
+            Move down
+             */
+            if(i<row-1 && T[i+1][j]!=0 && !G[i+1][j] && c==null){
+                c = findCell(T, i+1, j, dest, row, cols, G);
+            }
+            /*
+            Move left
+             */
+            if(j>0 && T[i][j-1]!=0 && !G[i][j-1] && c==null){
+                c = findCell(T, i, j-1, dest, row, cols, G);
+            }
+            return c;
         }
     }
 
