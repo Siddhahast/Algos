@@ -13,6 +13,8 @@ public class KruskalMST {
 
     private Queue<Edge> mst = new LinkedList<Edge>();
 
+
+
     public KruskalMST(EdgeWeightedGraph graph){
         Queue<Edge> edges = new PriorityQueue<Edge>();
         for(Edge e:graph.edges()){

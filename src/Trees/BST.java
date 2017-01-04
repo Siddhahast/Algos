@@ -188,4 +188,23 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
+
+    /*
+    Generic serach algorithm impl for a BST using key.
+     */
+    public Value getValue(Key key){
+        Node x = root;
+        while(x!=null){
+            int cmp = key.compareTo((Key) x.getKey());
+            if(cmp>=1){
+                x = x.left;
+            } else if (cmp<=-1){
+                x= x.right;
+            } else{
+                return (Value) x.getValue();
+            }
+        }
+        return null;
+    }
+
 }

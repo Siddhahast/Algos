@@ -12,35 +12,26 @@ public class TuplesProblem {
 
     public static void main(String[] args) throws IOException {
 
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        TupleTree tree = new TupleTree();
-//        for (; ; ) {
-//            try {
-//                String line = br.readLine();
-//                if (line.length() == 0 && line.equals("\n")) {
-//                    break;
-//                } else {
-//                    StringTokenizer str = new StringTokenizer(line);
-//                    char parent = str.nextToken().charAt(0);
-//                    char child = str.nextToken().charAt(0);
-//                    tree.add(new Node(parent), new Node(child));
-//                }
-//
-//            } catch (Exception e) {
-//                System.out.print(e.getMessage());
-//                break;
-//            }
-//        }
-//        try{
-//            System.out.println("Success");
-//        } catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        TupleTree tree = new TupleTree();
+        for (; ; ) {
+            try {
+                String line = br.readLine();
+                if (line.length() == 0 && line.equals("\n")) {
+                    break;
+                } else {
+                    StringTokenizer str = new StringTokenizer(line);
+                    char parent = str.nextToken().charAt(0);
+                    char child = str.nextToken().charAt(0);
+                    tree.add(new Node(parent), new Node(child));
+                }
 
-        System.out.println("in main string args");
-    }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                break;
+            }
+        }
 
-    public static void main(char[] args) {
-        System.out.println("char arguments");
+
     }
 }
