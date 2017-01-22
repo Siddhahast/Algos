@@ -22,7 +22,7 @@ public class MaxSubarray {
                 arr[j] = Integer.parseInt(str.nextToken());
             }
             MinMax minMax = processArray(arr);
-            System.out.println(minMax.min + " "+ minMax.max);
+            System.out.println(minMax.csum + " "+ minMax.ncsum);
 
         }
     }
@@ -34,13 +34,15 @@ public class MaxSubarray {
         int i = 1;
 
         int max = arr[0];
-        T[0] = max;
         int sum = arr[0];
+        T[0] = max;
+        int csum = arr[0];
         while(i<arr.length){
             if(arr[i]>0){
                 sum = sum + arr[i];
             }
             if((T[i-1]+ arr[i])>0){
+                csum =  csum + arr[i];
                 T[i] = arr[i]+ T[i-1];
                 if(max<T[i]){
                     max = T[i];
@@ -50,10 +52,13 @@ public class MaxSubarray {
             }
             i++;
         }
+        if(arr[0]<0 && csum>0){
+            csum = csum - arr[0];
+        }
         if(arr[0]<0 && sum>0){
             sum = sum - arr[0];
         }
-        return new MinMax(sum, max);
+        return new MinMax( max, sum);
     }
 
 
@@ -66,12 +71,12 @@ public class MaxSubarray {
     }
 
     private static class MinMax{
-        int min;
-        int max;
+        int csum;
+        int ncsum;
 
-        public MinMax(int min, int max){
-            this.min = min;
-            this.max = max;
+        public MinMax(int csum, int ncsum){
+            this.csum = csum;
+            this.ncsum = ncsum;
         }
 
     }

@@ -23,6 +23,7 @@ public class TreeTest {
         Node node11 = new Node(90);
         Node node12 = new Node(16);
         Node node13 = new Node(22);
+        Node node14 = new Node(88);
 
         /*
         Tree creation
@@ -42,9 +43,10 @@ public class TreeTest {
         node7.rightChild = node10;
         node9.rightChild = node12;
         node12.leftChild = node13;
-        int a = 10;
-        int b = a++ + ++a;
-        System.out.print(b);
+        node11.leftChild = node14;
+
+        TreeViewer viewer = new TreeViewer();
+        viewer.topView(node1, 1, 0);
 
     }
 }
