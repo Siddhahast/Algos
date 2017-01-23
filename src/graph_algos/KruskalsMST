@@ -1,0 +1,21 @@
+On an edge weighted graph, a minimum spanning tree is a graphical interconnection between nodes, so that
+the sum of the edge weights is less than any other tree.
+
+
+Algorithm :
+    Motivation : Need to stop creating cycles in the graph/tree.
+
+    Process:
+        1. enqueue all the edges of a graph and put them on a priority queue based on their weights.
+        2. Create a Union find DS that will test whether two nodes are interconnected or not.
+        3. Dequeue the edges individually and find out the vertices/nodes.
+        4. Test whether the nodes are connected or not.
+        5. If they are connected then ignore it.
+        6. Else union the two nodes and mark them connected(path compression technique).
+        7. Add the edge to the mst queue. Ideally create a mst queue of edges.
+
+    Testing the connection of nodes (via the union path compression algorithm prevents cretion of cycles).
+
+        If we select the edge (via iteration ) where both the ends are part of the tree,
+    then they will have the same connected components.
+

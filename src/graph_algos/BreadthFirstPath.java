@@ -19,7 +19,7 @@ public class BreadthFirstPath {
         marked = new boolean[G.getV()];
         edgeTo = new int[G.getV()];
         distTo = new int[G.getV()];
-        bfs(G, 0);
+        bfs(G, s);
     }
 
     public void bfs(Graph G, int v){
