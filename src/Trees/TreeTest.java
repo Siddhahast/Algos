@@ -45,8 +45,12 @@ public class TreeTest {
         node12.leftChild = node13;
         node11.leftChild = node14;
 
-        TreeViewer viewer = new TreeViewer();
-        viewer.topView(node1, 1, 0);
+        boolean found = PrintPaths.printPaths(node1, node11, node13);
+        List<Node> nodes = PrintPaths.paths;
+        for (Node n:nodes){
+            System.out.print(n.data + " ");
+        }
+
 
     }
 }

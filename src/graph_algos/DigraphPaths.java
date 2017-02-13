@@ -1,6 +1,7 @@
 package graph_algos;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.Stack;
 
@@ -36,6 +37,11 @@ public class DigraphPaths {
         reversePostOrder.push(v);
     }
 
+    /*
+    The reverse post order will return me a stack,
+    need to write the algo for reversing the stack.
+    This will give me the topological sotred vertices in the graph.
+     */
     public Iterable<Integer> getReversePostOrder(){
         topologicalSort();
         return reversePostOrder;
@@ -82,7 +88,16 @@ public class DigraphPaths {
         graph.addEdge(5,1);
         DigraphPaths paths = new DigraphPaths(graph);
         Set<Integer> set = new HashSet<Integer>();
-        System.out.print(paths.isCyclic(graph, 0, set));
+        Iterable<Integer> it = paths.getReversePostOrder();
+        Iterator<Integer> i = it.iterator();
+        while(i.hasNext()){
+            System.out.println(i.next());
+        }
+
+
+        for (int j = 1; j<10;j++){
+            System.out.println(i);
+        }
     }
 
 }
