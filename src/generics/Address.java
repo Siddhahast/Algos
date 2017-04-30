@@ -20,4 +20,13 @@ public class Address implements Item {
     }
 
 
+    @Override
+    public String getItemType() {
+        return flat;
+    }
+
+    @Override
+    public String getMatchType() {
+        return null;
+    }
 }
