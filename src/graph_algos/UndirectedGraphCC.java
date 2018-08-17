@@ -3,14 +3,14 @@ package graph_algos;
 /**
  * Created by siddhahastmohapatra on 16/12/16.
  */
-public class GraphCC {
+public class UndirectedGraphCC {
 
     private boolean[] marked;
     private int[] cc;
     private int counts;
-    private Graph g;
+    private UndirectedGraph g;
 
-    public GraphCC(Graph g){
+    public UndirectedGraphCC(UndirectedGraph g){
         this.g = g;
         counts = 0;
         marked = new boolean[g.getV()];
@@ -31,7 +31,7 @@ public class GraphCC {
         return cc[v];
     }
 
-    public void dfs(Graph g, int v){
+    public void dfs(UndirectedGraph g, int v){
         marked[v] = true;
         cc[v] = counts;
         for(int w:g.adj(v)){

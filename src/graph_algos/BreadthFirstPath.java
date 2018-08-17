@@ -14,7 +14,7 @@ public class BreadthFirstPath {
     private int s;
     Queue<Integer> q = new LinkedList<Integer>();
 
-    public BreadthFirstPath(Graph G, int s){
+    public BreadthFirstPath(UndirectedGraph G, int s){
         this.s = s;
         marked = new boolean[G.getV()];
         edgeTo = new int[G.getV()];
@@ -22,7 +22,7 @@ public class BreadthFirstPath {
         bfs(G, s);
     }
 
-    public void bfs(Graph G, int v){
+    public void bfs(UndirectedGraph G, int v){
 
         q.add(v);
         marked[v] = true;

@@ -1,7 +1,5 @@
 package GraphDS;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,8 +45,4 @@ public class Graph {
             System.out.println(it.next().data);
         }
     }
-
-
-
-
 }

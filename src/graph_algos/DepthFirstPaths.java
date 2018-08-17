@@ -15,7 +15,7 @@ public class DepthFirstPaths {
     private String color[];
     private int s;
 
-    public DepthFirstPaths(Graph G, int s){
+    public DepthFirstPaths(UndirectedGraph G, int s){
         this.s = s;
         this.color = new String[G.getV()];
         this.color[s] = "RED";
@@ -31,7 +31,7 @@ public class DepthFirstPaths {
         }
     }
 
-    public void dfs(Graph G, int v){
+    public void dfs(UndirectedGraph G, int v){
         marked[v] = true;
         System.out.print(v);
         for (int w: G.adj(v)){
@@ -62,7 +62,7 @@ public class DepthFirstPaths {
         }
     }
 
-    public boolean cyclicUtil(Graph graph, int v, int parent){
+    public boolean cyclicUtil(UndirectedGraph graph, int v, int parent){
         marked[v] = true;
         for (int w:graph.adj(v)){
             if(!marked[w]){
@@ -77,7 +77,7 @@ public class DepthFirstPaths {
     /*
     API to test whether a graph has a cycle or not.
      */
-    public boolean isCyclic(Graph graph){
+    public boolean isCyclic(UndirectedGraph graph){
         for (int i=0;i<graph.getV();i++){
             marked[i] = false;
         }
@@ -92,7 +92,7 @@ public class DepthFirstPaths {
     }
 
 
-    public boolean isCycle(Graph graph, int v, Set<Integer> visited){
+    public boolean isCycle(UndirectedGraph graph, int v, Set<Integer> visited){
         visited.add(v);
         boolean cycle = false;
         for (int w:graph.adj(v)){
@@ -108,7 +108,7 @@ public class DepthFirstPaths {
         return cycle;
     }
 
-    public boolean isSafe(Graph graph, int[] color,int v, int c){
+    public boolean isSafe(UndirectedGraph graph, int[] color,int v, int c){
         for (int w:graph.adj(v)){
             if(color[w]==c){
                 return false;
@@ -120,7 +120,7 @@ public class DepthFirstPaths {
     /*
     API for finding the graph is bipartite
      */
-    public boolean mGraphColoringUtil(Graph graph, int[] color, int v, int m){
+    public boolean mGraphColoringUtil(UndirectedGraph graph, int[] color, int v, int m){
         if(v==graph.getV()){
             return true;
         }
@@ -146,7 +146,7 @@ public class DepthFirstPaths {
     API for coloring the graph, here we can enter any value of m
     If m is 2 and the color is printed then graph is bipartite.
      */
-    public void mColoringGraph(Graph graph, int m){
+    public void mColoringGraph(UndirectedGraph graph, int m){
         int[] color = new int[graph.getV()];
         if(!mGraphColoringUtil(graph, color, 0, m)){
             System.out.println("Solution does not exist");
@@ -156,7 +156,7 @@ public class DepthFirstPaths {
         //Print the solution color array;
     }
 
-    public boolean bipartite(Graph graph , int v){
+    public boolean bipartite(UndirectedGraph graph , int v){
         int[] color = new int[graph.getV()];
         if(!mGraphColoringUtil(graph, color, 0, 2)){
             return false;
@@ -164,7 +164,7 @@ public class DepthFirstPaths {
         return true;
     }
 
-    public void eulerCycle(Graph graph, int v, Stack<Integer> stack){
+    public void eulerCycle(UndirectedGraph graph, int v, Stack<Integer> stack){
         marked[v] = true;
         for (int w:graph.adj(v)){
             if(marked[w]){
@@ -173,7 +173,7 @@ public class DepthFirstPaths {
         }
     }
 
-    private boolean isConnected(Graph graph){
+    private boolean isConnected(UndirectedGraph graph){
         for(int i=0; i<graph.getV();i++){
 
         }

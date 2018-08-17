@@ -6,7 +6,7 @@ package graph_algos;
 public class Graph_Test {
 
     public static void main(String[] args) {
-        Graph graph = new Graph(5);
+        UndirectedGraph graph = new UndirectedGraph(5);
         graph.addEdge(1, 0);
         graph.addEdge(0, 2);
         graph.addEdge(2, 1);

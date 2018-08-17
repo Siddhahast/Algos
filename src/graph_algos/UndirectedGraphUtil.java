@@ -3,9 +3,9 @@ package graph_algos;
 /**
  * Created by siddhahastmohapatra on 15/12/16.
  */
-public class GraphUtil {
+public class UndirectedGraphUtil {
 
-    public static int degreeV(Graph G, int v){
+    public static int degreeV(UndirectedGraph G, int v){
         int degree = 0;
         for(int i:G.adj(v)){
             degree++;
@@ -13,7 +13,7 @@ public class GraphUtil {
         return degree;
     }
 
-    public static int maxDegree(Graph G){
+    public static int maxDegree(UndirectedGraph G){
         int maxDegree = 0;
         for(int v = 0; v<G.getV(); v++){
             if(degreeV(G, v)>maxDegree){
@@ -24,7 +24,7 @@ public class GraphUtil {
     }
 
 
-    public static int selfCounts(Graph G){
+    public static int selfCounts(UndirectedGraph G){
         int counts = 0;
         for(int v=0;v<G.getV(); v++){
             for(int w:G.adj(v)){
@@ -37,7 +37,7 @@ public class GraphUtil {
     }
 
 
-    public static boolean cycleInGraph(Graph graph){
+    public static boolean cycleInGraph(UndirectedGraph graph){
         DepthFirstPaths path = new DepthFirstPaths(graph, 0);
 
 

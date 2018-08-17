@@ -10,7 +10,7 @@ public class Paths {
     boolean marked[];
     int edgeTo[];
 
-    public Paths(Graph G, int s){
+    public Paths(UndirectedGraph G, int s){
         marked = new boolean[G.getV()];
         edgeTo = new int[G.getV()];
     }

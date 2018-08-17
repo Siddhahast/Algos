@@ -3,13 +3,13 @@ package graph_algos;
 /**
  * Created by siddhahastmohapatra on 15/12/16.
  */
-public class Graph {
+public class UndirectedGraph {
     int V;//vertices
     int E;//edges
 
     private Bag<Integer> adj[];
 
-    public Graph(int V){
+    public UndirectedGraph(int V){
         this.V = V;
         adj = (Bag<Integer>[]) new Bag[V];
         for(int v = 0; v<V; v++){
